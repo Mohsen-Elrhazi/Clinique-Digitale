@@ -169,12 +169,16 @@
                                 email
                             </th>
 
-                            <th scope="col" class="text-center align-middle w-1/6 px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                MotDePasse
-                            </th>
+<%--                            <th scope="col" class="text-center align-middle w-1/6 px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">--%>
+<%--                                MotDePasse--%>
+<%--                            </th>--%>
 
                             <th scope="col" class="text-center align-middle w-1/6 px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
                                 Specialité
+                            </th>
+
+                            <th scope="col" class="text-center align-middle w-1/6 px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
+                                Departement
                             </th>
 
                             <th scope="col" class="text-center align-middle w-1/6 px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
@@ -198,26 +202,160 @@
                                 <td class="text-center align-middle flex-1 px-6 py-4 text-gray-500 whitespace-nowrap">
                                         ${docteur.email}
                                 </td>
-                                <td class="text-center align-middle flex-1 px-6 py-4 text-gray-500 whitespace-nowrap">
-                                        ${docteur.motDePasse}
-                                </td>
+<%--                                <td class="text-center align-middle flex-1 px-6 py-4 text-gray-500 whitespace-nowrap">--%>
+<%--                                        ${docteur.motDePasse}--%>
+<%--                                </td>--%>
                                 <td class="text-center align-middle flex-1 px-6 py-4 text-gray-500 whitespace-nowrap">
                                         ${docteur.specialite}
+                                </td>
+                                <td class="text-center align-middle flex-1 px-6 py-4 text-gray-500 whitespace-nowrap">
+                                        ${docteur.departement.nom}
                                 </td>
 
                                 <td class="text-center align-middle px-6 py-4  ">
                                     <div class="flex justify-center items-center space-x-4">
-                                            <%--                                            button update--%>
-                                        <form method="post" action="${pageContext.request.contextPath}/admin/docteurs">
-                                            <input type="hidden" name="action" value="update">
-                                            <input type="hidden" name="id" value="${docteur.id}">
-                                            <button class="mx-4 text-gray-500 focus:outline-none hover:text-indigo-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                                </svg>
-                                            </button>
-                                        </form>
 
+                                                    <%-- button update--%>
+                                                <div x-data="{ modelOpen: false }">
+                                                    <!-- Bouton d'ouverture -->
+                                                    <button
+                                                            @click="modelOpen = !modelOpen"
+                                                            class="mx-4 text-gray-500 focus:outline-none hover:text-indigo-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">--%>
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                        </svg>
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div
+                                                            x-show="modelOpen"
+                                                            x-cloak
+                                                            class="fixed inset-0 z-50 overflow-y-auto"
+                                                            aria-labelledby="modal-title"
+                                                            role="dialog"
+                                                            aria-modal="true"
+                                                    >
+                                                        <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+
+                                                            <!-- Fond flou -->
+                                                            <div
+                                                                    @click="modelOpen = false"
+                                                                    x-show="modelOpen"
+                                                                    x-transition:enter="transition ease-out duration-300 transform"
+                                                                    x-transition:enter-start="opacity-0"
+                                                                    x-transition:enter-end="opacity-100"
+                                                                    x-transition:leave="transition ease-in duration-200 transform"
+                                                                    x-transition:leave-start="opacity-100"
+                                                                    x-transition:leave-end="opacity-0"
+                                                                    class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40 backdrop-blur-sm"
+                                                                    aria-hidden="true">
+                                                            </div>
+
+                                                            <!-- Contenu -->
+                                                            <div
+                                                                    x-show="modelOpen"
+                                                                    x-transition:enter="transition ease-out duration-300 transform"
+                                                                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                                                    x-transition:leave="transition ease-in duration-200 transform"
+                                                                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                                                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                                    class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl rtl:text-right 2xl:max-w-2xl"
+                                                            >
+                                                                <!-- En-tête -->
+                                                                <div class="flex items-center justify-between mb-4">
+                                                                    <h1 class="text-xl font-medium text-gray-800">Ajouter un Docteur</h1>
+                                                                    <button
+                                                                            @click="modelOpen = false"
+                                                                            class="text-gray-600 focus:outline-none hover:text-gray-800"
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <p class="text-sm text-gray-500 mb-6">
+                                                                    Remplissez les informations ci-dessous pour ajouter un nouveau docteur au système.
+                                                                </p>
+
+                                                                <!-- Formulaire -->
+                                                                <form class="space-y-4" method="post" action="${pageContext.request.contextPath}/admin/docteurs">
+                                                                    <input type="hidden" name="action" value="update">
+                                                                        <input type="hidden" name="docteurID" value="${docteur.id}">
+
+                                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                                        <div>
+                                                                            <label class="block text-sm font-medium text-gray-700">Nom</label>
+                                                                            <input name="nom" type="text" placeholder="Dupont" value="${docteur.nom}"
+                                                                                   class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">
+                                                                        </div>
+                                                                        <div>
+                                                                            <label class="block text-sm font-medium text-gray-700">Prénom</label>
+                                                                            <input name="prenom" type="text" placeholder="Jean" value="${docteur.prenom}"
+                                                                                   class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                                                                        <input name="email" type="email" placeholder="jean.dupont@example.com" value="${docteur.email}"
+                                                                               class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">
+                                                                    </div>
+
+<%--                                                                    <div>--%>
+<%--                                                                        <label class="block text-sm font-medium text-gray-700">Mot de passe</label>--%>
+<%--                                                                        <input name="motDePasse" type="password" placeholder="********" value="${docteur.motDePasse}"--%>
+<%--                                                                               class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">--%>
+<%--                                                                    </div>--%>
+
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-gray-700">Spécialité</label>
+                                                                        <input name="specialite" type="text" placeholder="Cardiologue" value="${docteur.specialite}"
+                                                                               class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <label class="block text-sm font-medium text-gray-700">Departement</label>
+                                                                        <select name="departementID"    class="w-full mt-1 px-3 py-2 border rounded-md text-gray-700 placeholder-gray-400 focus:border-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-40 outline-none">
+                                                                            >
+                                                                            <c:forEach var="dept" items="${departements}">
+                                                                                <option value="${dept.idDepartement}"
+                                                                                        <c:if test="${docteur.departement != null && dept.idDepartement == docteur.departement.idDepartement}">
+                                                                                            selected
+                                                                                        </c:if>>
+                                                                                        ${dept.nom}
+                                                                                </option>                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <!-- Boutons -->
+                                                                    <div class="flex justify-end mt-6 space-x-2">
+                                                                        <button
+                                                                                type="button"
+                                                                                @click="modelOpen = false"
+                                                                                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border rounded-md hover:bg-gray-200 focus:outline-none">
+                                                                            Annuler
+                                                                        </button>
+                                                                        <button
+                                                                                type="submit"
+                                                                                class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                                                            Modifier
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+
+<%--                                            button delete--%>
                                         <form method="post" action="${pageContext.request.contextPath}/admin/docteurs">
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="id" value="${docteur.id}">
@@ -227,6 +365,8 @@
                                                 </svg>
                                             </button>
                                         </form>
+
+
 
                                     </div>
                                 </td>

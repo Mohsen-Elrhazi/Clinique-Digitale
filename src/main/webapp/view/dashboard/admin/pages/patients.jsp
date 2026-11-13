@@ -5,10 +5,11 @@
   Time: 13:52
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="p-4 bg-white rounded-lg shadow-sm xl:p-8">
     <div class="space-y-3 sm:flex sm:items-start sm:space-y-0 sm:justify-between">

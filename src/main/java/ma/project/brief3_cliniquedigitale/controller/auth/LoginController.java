@@ -23,7 +23,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Afficher la page d'inscription
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/auth/login.jsp");
         dispatcher.forward(request, response);
     }

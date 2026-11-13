@@ -45,7 +45,7 @@ public class DocteurController extends HttpServlet {
         switch(action){
             case "save": save(request, response);
                 break;
-            case "update":
+            case "update": update(request, response);
                 break;
             case "delete": delete(request, response);
                 break;
@@ -75,6 +75,33 @@ public class DocteurController extends HttpServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long id= Long.valueOf(request.getParameter("id"));
         docteurService.delete(id);
+        response.sendRedirect(request.getContextPath() + "/admin/docteurs");
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Long id = Long.parseLong(request.getParameter("docteurID"));
+        String nom= request.getParameter("nom");
+        String prenom= request.getParameter("prenom");
+        String email= request.getParameter("email");
+        String motDePasse= request.getParameter("motDePasse");
+        String specialite= request.getParameter("specialite");
+        Long departementID= Long.parseLong(request.getParameter("departementID"));
+
+        Optional<Departement> departementOpt = departementService.findByid(departementID);
+        Departement departement= departementOpt.get();
+
+        Optional<Docteur> docteurOpt = docteurService.findById(id);
+        Docteur docteur= docteurOpt.get();
+
+        docteur.setNom(nom);
+        docteur.setPrenom(prenom);
+        docteur.setEmail(email);
+        docteur.setMotDePasse(motDePasse);
+        docteur.setSpecialite(specialite);
+        docteur.setDepartement(departement);
+
+        docteurService.update(docteur);
+
         response.sendRedirect(request.getContextPath() + "/admin/docteurs");
     }
 
