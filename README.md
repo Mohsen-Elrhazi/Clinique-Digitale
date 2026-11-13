@@ -37,11 +37,6 @@ Application web **Java EE / Jakarta EE** conçue pour centraliser la gestion adm
 
 * **Architecture MVC multi-couches :** Séparation claire des responsabilités (`Controller / Servlet` → `Service` → `Repository / DAO` → `Entity` → `Vue JSP`).
 * **Persistance des données :** Gestion du mapping objet-relationnel (ORM) avec **JPA / Hibernate** sur une base **MySQL**.
-* **Règles métier & Gestion des exceptions :**
-  * Découpage automatique des disponibilités en **créneaux de 30 minutes**.
-  * Contrôle strict d'unicité empêchant les doubles réservations sur un même créneau horaire ou une même salle.
-  * Gestion centralisée des exceptions métier et des erreurs HTTP.
-* **Sécurité & Contrôle d'accès :** Authentification, gestion des sessions via **`HttpSession`** et protection des routes par rôles via des **`Filters` Java EE**.
 * **Interface dynamique & Responsive :** Rendu côté serveur avec **JSP / JSTL**, stylisé avec **Tailwind CSS**.
 * **Conteneurisation :** Déploiement simplifié du serveur d'applications (Tomcat / WildFly) et de la base MySQL via **Docker**.
 
